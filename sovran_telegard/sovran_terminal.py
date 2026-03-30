@@ -153,8 +153,9 @@ def list_doors(session_user):
             drop_path = os.path.join(target['path'], "DOOR.SYS")
             
             if sovran_dropfile.generate_door_sys(user_obj, path=drop_path):
-                print(f"\n[!] NOTE: 16-bit execution requires DOSBox. Shard registered.")
-                print(f"    Dropfile established in: {drop_path}")
+                print(f"\n[✅] Dropfile established in: {drop_path}")
+                print(f"\n[∰] To enter the Tavern, run this command in a new terminal:")
+                print(f"    bash sovran-telegard-repo/sovran_telegard/sovran_launch_door.sh {target['id']}")
             else:
                 print(f"\n[❌] Bridge failure. Check file permissions.")
         else:
@@ -245,7 +246,7 @@ def run_zap():
     except ValueError:
         print("[!] Invalid input.")
 
-def main_menu():
+def main_menu(session_user="Guest"):
     """The main command loop."""
     print("\nType '/help' for a list of commands.")
     
@@ -293,7 +294,7 @@ def main_menu():
             elif cmd == "/whoami":
                 print(f"\nCurrent Identity: {session_user}")
             elif cmd == "/handshake":
-                handshake()
+                session_user = handshake()
             elif cmd.startswith("/"):
                 # Handle direct search if someone types /query
                 list_files(cmd[1:])
@@ -321,4 +322,4 @@ if __name__ == "__main__":
     print(f"SysOp: {config.sysop_name}")
 
     session_user = handshake(prefill_identity=args.identity)
-    main_menu()
+    main_menu(session_user=session_user)

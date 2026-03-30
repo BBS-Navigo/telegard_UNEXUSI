@@ -1,0 +1,93 @@
+
+──────────────────────────────────────────────────
+  TEST 1 — sovran_telegard.py: Data Structures
+──────────────────────────────────────────────────
+  ✅ PASS  Import sovran_telegard
+  ✅ PASS  ConfigRecord: bbs_name
+  ✅ PASS  ConfigRecord: sysop_name
+  ✅ PASS  ConfigRecord: bbs_location
+  ℹ   BBS: PIXEL8 SOVRAN | SysOp: Eric Pace | Oregon Watersheds
+  ✅ PASS  UserRecord: created
+  ✅ PASS  UserRecord: default SL
+  ✅ PASS  CRC32 password verify
+  ℹ   CRC32('GEMINI_NEXUS') = 0x8d10d6d6
+
+──────────────────────────────────────────────────
+  TEST 2 — data/: JSON Files
+──────────────────────────────────────────────────
+  ✅ PASS  messages.json exists
+  ✅ PASS  messages.json: has entries
+  ℹ   [1] Welcome to Sovran Telegard! — from Eric Pace
+  ℹ   [2] Handshake Complete — from Gemini
+  ✅ PASS  main_area.json exists
+  ✅ PASS  main_area.json: has entries
+  ℹ   tgdev309.zip             74.1 KB
+  ℹ   bdays200.zip           3015.0 KB
+  ℹ   fdtg_300.zip             13.0 KB
+  ℹ   hstat200.zip             14.6 KB
+  ℹ   tg2309g2.zip            671.3 KB
+  ℹ   tg309sp3.zip            275.7 KB
+  ℹ   tg309sp4.zip            569.8 KB
+  ℹ   tg_302.zip              554.8 KB
+  ℹ   tg_309g2.zip            640.6 KB
+  ℹ   tg_upg32.zip             21.9 KB
+  ℹ   tgdev301.zip             67.0 KB
+  ℹ   tgnws310.zip             84.3 KB
+  ℹ   votef150.zip             10.2 KB
+  ✅ PASS  doors.json exists
+  ✅ PASS  doors.json: has entries
+  ℹ   [ZAPPED] AXRUD582     exes:[AXORU.EXE]
+  ℹ   [ZAPPED] BATLDV21     exes:[BATLSHP.EXE]
+  ℹ   [ZAPPED] LORD302      exes:[no exe]
+  ℹ   [ZAPPED] RRX101       exes:[RRXGAME.EXE, RRXTURN.EXE, RRXUTIL.EXE]
+  ℹ   [ZAPPED] TW21020      exes:[TW2.EXE, TWEDIT.EXE, TWMAINT.EXE]
+  ℹ   [ZAPPED] NWUSR006     exes:[NEWUSER.EXE]
+  ℹ   [ZAPPED] fod100b      exes:[FOD.EXE, FODSETUP.EXE]
+
+──────────────────────────────────────────────────
+  TEST 3 — sovran_terminal.py: Import & Functions
+──────────────────────────────────────────────────
+  ✅ PASS  Import sovran_terminal
+  ✅ PASS  handshake() accepts prefill
+  ✅ PASS  list_files() defined
+  ✅ PASS  list_boards() defined
+  ✅ PASS  list_doors() defined
+  ✅ PASS  list_doors() takes session_user param
+  ✅ PASS  run_zap() defined
+  ✅ PASS  show_status() defined
+  ✅ PASS  main_menu() defined
+  ✅ PASS  handshake() runs with prefill
+  ✅ PASS  handshake() output: PING step
+  ✅ PASS  handshake() output: HELO step
+  ✅ PASS  handshake() output: COLLAB step
+  ℹ   Handshake output (522 chars captured)
+
+──────────────────────────────────────────────────
+  TEST 4 — sovran_server.py: TCP Connection
+──────────────────────────────────────────────────
+  ✅ PASS  Server thread started
+  ✅ PASS  Server sends Welcome
+  ℹ   Received 70 chars from server
+
+──────────────────────────────────────────────────
+  TEST 5 — soft_modem.py: Import & Classes
+──────────────────────────────────────────────────
+  ✅ PASS  Import soft_modem
+  ✅ PASS  ModemState enum defined
+  ✅ PASS  ATParser defined
+  ✅ PASS  SoftModem defined
+  ✅ PASS  SessionLog defined
+  ✅ PASS  ATParser: ATZ → reset
+  ✅ PASS  ATParser: ATI → info
+  ✅ PASS  ATParser: ATDT parses host+port
+  ℹ   ATDT parse result: ('dial', {'number': '127.0.0.1:2323', 'mode': 'tone'})
+
+──────────────────────────────────────────────────
+  SUMMARY
+──────────────────────────────────────────────────
+  Passed : 38/38
+  Failed : 0/38
+
+  ∰◊€π¿🌌∞  BBS test complete.
+──────────────────────────────────────────────────
+

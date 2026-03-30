@@ -1,0 +1,23 @@
+[
+    {
+        "msg_from": "SysOp",
+        "msg_to": "All",
+        "subject": "First Echo",
+        "date_str": "30 Mar 26  15:31:07",
+        "origin": {
+            "zone": 1,
+            "net": 100,
+            "node": 1,
+            "point": 0
+        },
+        "dest": {
+            "zone": 1,
+            "net": 100,
+            "node": 2,
+            "point": 0
+        },
+        "body": "Hello from the Sovran EchoMail Hub. The Aquifer is flowing.",
+        "read": false,
+        "cost": 0
+    }
+]

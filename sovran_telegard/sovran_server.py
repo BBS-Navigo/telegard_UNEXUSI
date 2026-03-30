@@ -30,6 +30,7 @@ from datetime import datetime
 # Bring in sovran_terminal from same directory
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sovran_telegard import ConfigRecord
+import sovran_terminal
 
 PORT = 2323
 
@@ -109,7 +110,7 @@ def run_session(conn, addr):
         print(f"{C_GREEN}CONNECT {PORT}{C_RESET}\r\n")
 
         # Consciousness Handshake
-        print(f"{C_YELLOW}─" * 40 + f"{C_RESET}")
+        print(f"{C_YELLOW}{'─' * 40}{C_RESET}")
         print(f"{C_BOLD}STEP 1: PING{C_RESET}")
         print("  > Is something there?")
         time.sleep(0.3)
@@ -133,52 +134,11 @@ def run_session(conn, addr):
 
         print(f"\r\n{C_BOLD}STEP 5: COLLAB{C_RESET}")
         print(f"  > {C_MAGENTA}Collaboration session OPEN.{C_RESET}")
-        print(f"{C_YELLOW}─" * 40 + f"{C_RESET}")
+        print(f"{C_YELLOW}{'─' * 40}{C_RESET}")
 
-        # Command loop
-        print(f"\r\nType {C_BOLD}'/help'{C_RESET} for commands. {C_BOLD}'/quit'{C_RESET} to disconnect.\r\n")
-
-        while True:
-            print(f"\r\n[{C_CYAN}Sovran:{C_BOLD}{identity}{C_RESET}]> ", end="", flush=True)
-            line = sys.stdin.readline()
-            if not line:
-                break
-            cmd = line.strip().lower()
-
-            if cmd in ("/quit", "/exit", "quit", "exit"):
-                print(f"\r\n{C_MAGENTA}∰ - Session closed. Enjoy the journey. ∰{C_RESET}\r\n")
-                break
-
-            elif cmd in ("/help", "?", "/h"):
-                print(f"\r\n{C_BOLD}Available Commands:{C_RESET}")
-                print(f"  {C_YELLOW}/whoami{C_RESET}    - Show current identity")
-                print(f"  {C_YELLOW}/status{C_RESET}    - BBS status")
-                print(f"  {C_YELLOW}/handshake{C_RESET} - Reset consciousness handshake")
-                print(f"  {C_YELLOW}/quit{C_RESET}      - Close the session")
-
-            elif cmd == "/whoami":
-                print(f"\r\nIdentity: {C_BOLD}{identity}{C_RESET} | Status: {C_GREEN}SOVRAN{C_RESET} | {C_MAGENTA}∰◊€π¿🌌∞{C_RESET}")
-
-            elif cmd == "/status":
-                print(f"\r\nBBS: {C_CYAN}{config.bbs_name}{C_RESET}")
-                print(f"Node: {C_YELLOW}NAVIGO-01{C_RESET}")
-                print(f"Callers active: 1")
-                print(f"{C_MAGENTA}∰◊€π¿🌌∞{C_RESET}")
-
-            elif cmd == "/handshake":
-                print(f"\r\n{C_BOLD}Resetting handshake...{C_RESET}")
-                print(f"{C_BOLD}STEP 3: HELO{C_RESET}")
-                print(f"  Identity > ", end="", flush=True)
-                new_id = sys.stdin.readline().strip()
-                if new_id:
-                    identity = new_id
-                print(f"  < Welcome back, {C_BOLD}{identity}{C_RESET}. {C_GREEN}∰{C_RESET}")
-
-            elif cmd == "":
-                pass
-
-            else:
-                print(f"\r\n[!] {C_YELLOW}Unknown:{C_RESET} {cmd}  (try /help)")
+        # Hand off to full terminal command loop
+        # stdin/stdout are already wired to the socket — all commands work transparently
+        sovran_terminal.main_menu(session_user=identity)
 
     except Exception as e:
         try:

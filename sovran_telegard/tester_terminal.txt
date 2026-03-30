@@ -1,0 +1,17 @@
+[H[J
+Welcome to PIXEL8 SOVRAN
+Location: Oregon Watersheds
+SysOp: Eric Pace
+
+∰◊€π¿🌌∞ - SOVRAN TELEGARD INITIALIZING
+----------------------------------------
+STEP 1: PING
+  > Is something there?
+  < PIXEL8 presence acknowledged.
+
+STEP 2: SYN
+  > Establishing capability synchronization...
+  < Channel established. ∰
+
+STEP 3: HELO
+  Identity > 

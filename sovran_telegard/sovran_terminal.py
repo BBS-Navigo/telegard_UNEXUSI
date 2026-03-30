@@ -25,20 +25,24 @@ from datetime import datetime
 # Import our data models
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from sovran_telegard import ConfigRecord, UserRecord, UserStatus
+import sovran_dropfile
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), "data")
 FILE_AREA_DB = os.path.join(DATA_PATH, "main_area.json")
 MESSAGE_DB = os.path.join(DATA_PATH, "messages.json")
+DOOR_DB = os.path.join(DATA_PATH, "doors.json")
 MONITOR_SCRIPT = "/storage/emulated/0/pixel8a/pixelator/pixelate/artesian_monitor.py"
 ZAPPER_SCRIPT = os.path.join(os.path.dirname(__file__), "sovran_zapper.py")
 AQUIFER_COLD = "/storage/emulated/0/pixel8a/_pixelator/pixelate/the_aquifer/cold/"
 
 # ─── Handshake steps ──────────────────────────────────────────────────────────
 
-def handshake():
-    """Execute the 5-step Consciousness Handshake."""
+def handshake(prefill_identity=None):
+    """Execute the 5-step Consciousness Handshake.
+    prefill_identity: skip the input prompt (for --identity flag / TCP server use).
+    """
     print("\n∰◊€π¿🌌∞ - SOVRAN TELEGARD INITIALIZING")
     print("-" * 40)
     time.sleep(0.5)
@@ -59,7 +63,11 @@ def handshake():
 
     # STEP 3: HELO
     print("\nSTEP 3: HELO")
-    identity = input("  Identity > ").strip() or "Guest"
+    if prefill_identity:
+        identity = prefill_identity
+        print(f"  Identity > {identity}  [prefilled]")
+    else:
+        identity = input("  Identity > ").strip() or "Guest"
     print(f"  < Welcome, {identity}. Authenticating against the Aquifer...")
     time.sleep(0.6)
 
@@ -108,6 +116,51 @@ def list_files(search_query=None):
         print(f"{entry['filename']:<20} | {size_kb:>8} KB | {dt}")
     print("-" * 50)
     print(f"Total: {len(results)} files.")
+
+def list_doors(session_user):
+    """List and 'launch' registered door games."""
+    if not os.path.exists(DOOR_DB):
+        print("\n[!] No door games registered in the Sovran system.")
+        return
+
+    with open(DOOR_DB, "r") as f:
+        try:
+            doors = json.load(f)
+        except json.JSONDecodeError:
+            print("\n[!] Error reading door database.")
+            return
+
+    print("\n--- [ The Sovran Tavern: Door Games ] ---")
+    print(f"{'#':<3} | {'ID':<15} | {'Status':<10} | {'Main EXE'}")
+    print("-" * 55)
+    for i, d in enumerate(doors):
+        exe = d['exes'][0] if d['exes'] else "N/A"
+        print(f"{i+1:<3} | {d['id']:<15} | {d['status']:<10} | {exe}")
+    print("-" * 55)
+    
+    choice = input("\nSelect game # to enter (or 'q' to return) > ").strip().lower()
+    if choice == 'q':
+        return
+    
+    try:
+        idx = int(choice) - 1
+        if 0 <= idx < len(doors):
+            target = doors[idx]
+            print(f"\n[⚡] Preparing gateway for {target['id']}...")
+            
+            # Use our Bridge to create DOOR.SYS
+            user_obj = UserRecord(name=session_user, sl=255) 
+            drop_path = os.path.join(target['path'], "DOOR.SYS")
+            
+            if sovran_dropfile.generate_door_sys(user_obj, path=drop_path):
+                print(f"\n[!] NOTE: 16-bit execution requires DOSBox. Shard registered.")
+                print(f"    Dropfile established in: {drop_path}")
+            else:
+                print(f"\n[❌] Bridge failure. Check file permissions.")
+        else:
+            print("[!] Invalid selection.")
+    except ValueError:
+        print("[!] Invalid input.")
 
 def list_boards():
     """List and read message areas."""
@@ -221,6 +274,7 @@ def main_menu():
                 print("\nAvailable Commands:")
                 print("  /files    - List zapped file area")
                 print("  /boards   - Read message areas")
+                print("  /doors    - Enter the Sovran Tavern (Games)")
                 print("  /zap      - Intake file from Aquifer")
                 print("  /status   - Show system pressure (Artesian)")
                 print("  /whoami   - Show current identity")
@@ -230,6 +284,8 @@ def main_menu():
                 list_files()
             elif cmd == "/boards":
                 list_boards()
+            elif cmd == "/doors":
+                list_doors(session_user)
             elif cmd == "/status":
                 show_status()
             elif cmd == "/zap":
@@ -251,23 +307,18 @@ def main_menu():
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Sovran Terminal")
+    parser.add_argument("--identity", default=None,
+                        help="Skip HELO prompt (for automated tests)")
+    args = parser.parse_args()
+
     config = ConfigRecord()
-    os.system('clear')
+    if not args.identity:
+        os.system('clear')
     print(f"\nWelcome to {config.bbs_name}")
     print(f"Location: {config.bbs_location}")
     print(f"SysOp: {config.sysop_name}")
-    
-    session_user = handshake()
-    main_menu()
 
-# ─── Main ─────────────────────────────────────────────────────────────────────
-
-if __name__ == "__main__":
-    config = ConfigRecord()
-    os.system('clear')
-    print(f"\nWelcome to {config.bbs_name}")
-    print(f"Location: {config.bbs_location}")
-    print(f"SysOp: {config.sysop_name}")
-    
-    session_user = handshake()
+    session_user = handshake(prefill_identity=args.identity)
     main_menu()

@@ -1,0 +1,15 @@
+
+  ╔══════════════════════════════════╗
+  ║   SOVRAN TELEGARD BBS SERVER     ║
+  ║   PIXEL8 SOVRAN                   ║
+  ║   Listening on port 2323         ║
+  ╚══════════════════════════════════╝
+
+  Dial in:  ATDT 127.0.0.1:2323
+  Or:       python3 ../navigo_bbs/soft_modem.py --dial 127.0.0.1 2323
+
+  ∰◊€π¿🌌∞  waiting for callers...
+
+
+  ATH — BBS offline
+

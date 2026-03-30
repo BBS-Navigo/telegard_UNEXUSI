@@ -1,0 +1,34 @@
+  and paste what you see:
+                                                                 ---
+  Test 1 — Local terminal (no modem):
+  cd /storage/emulated/0/pixel8a/Q/runexusiam/sovran_telegard
+  python3 sovran_terminal.py
+  At the prompt, test: /boards → read msg 1 → /files → /doors →
+   /quit
+
+  Test 2 — TCP dial-in (two windows):
+
+  Window 1:
+  python3 sovran_server.py
+  Window 2:
+  cd /storage/emulated/0/pixel8a/Q/runexusiam/navigo_bbs
+  python3 soft_modem.py --dial 127.0.0.1 2323
+  Type identity at HELO >, then /help, /whoami, /quit
+
+  ---
+  What's working after these fixes:
+  - /boards → reads messages.json (3 messages including your
+  first session DNA)
+  - /files → reads main_area.json (5 entries)
+  - /doors → stub response (Stage 03 placeholder)
+  - No more double-handshake on local terminal startup
+
+  What's still to build (Stage 03+):
+  - ANSI passthrough in modem display (colors show raw labels
+  in session log)
+  - Server integration with full terminal commands (/boards,
+  /files only in local terminal, not TCP server yet)
+  - Actual door programs
+  - Vercel portal (Stage 05
+
+202603301256 navigo

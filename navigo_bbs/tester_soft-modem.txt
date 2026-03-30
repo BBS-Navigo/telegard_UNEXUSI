@@ -1,0 +1,18 @@
+  13:14:24 ● [STATE] INIT → INIT  (modem ready)
+
+  Navigo Soft Modem 0.1.0-iter1
+  AT command mode — type 'quit' to exit
+
+  Dial:   ATDT 127.0.0.1:2323   (or shorthand: d 127.0.0.1:2323)
+  Status: ATI   Hang up: ATH   Reset: ATZ
+
+
+  ══ Navigo Soft Modem 0.1.0-iter1 ══
+  State:    INIT
+  Baud:     2400
+  Session:  7e843992
+  Log:      /data/data/com.termux/files/home/.navigo_bbs/sessions/session_7e843992.json
+  ∰◊€π¿🌌∞
+
+AT> 
+  ATH

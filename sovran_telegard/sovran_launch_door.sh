@@ -63,11 +63,17 @@ fi
 
 echo "[⚡] Generating Launch Configuration..."
 
+# Legacy drawing mode for devices with black-screen issue
+# Usage: DOSBOX_LEGACY=1 ./sovran_launch_door.sh <ID>
+if [ -n "$DOSBOX_LEGACY" ]; then
+    echo "[⚡] Legacy drawing mode enabled"
+fi
+
 cat <<EOF > "$TEMP_CONF"
 [sdl]
 fullresolution=original
 windowresolution=original
-output=opengl
+output=surface
 waitonerror=true
 
 [render]
@@ -93,24 +99,35 @@ EOF
 
 # ─── Launch ─────────────────────────────────────────────────────────────────
 
-# Termux display detection
+# Termux:X11 display detection
+# Official docs use :1 — start with: termux-x11 :1 &
 if [ -z "$DISPLAY" ]; then
-    # Try Termux:X11 default display
-    export DISPLAY=:0
-    echo "[⚡] No DISPLAY set — trying :0 (requires Termux:X11 running)"
+    export DISPLAY=:1
+    echo "[⚡] No DISPLAY set — defaulting to :1"
+    echo "    Make sure Termux:X11 is running: termux-x11 :1 &"
 fi
 
 echo "[∰] Opening Tavern Door..."
+if [ -n "$DOSBOX_LEGACY" ]; then
+    termux-x11 :1 -legacy-drawing &
+    sleep 1
+fi
 dosbox -conf "$TEMP_CONF"
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -ne 0 ]; then
     echo ""
     echo "[⚠️] DOSBox exited with code $EXIT_CODE"
-    echo "    If you see MESA/ZINK errors:"
-    echo "    1. Install Termux:X11 from F-Droid"
-    echo "    2. Start Termux:X11, then run this script again"
-    echo "    Or try: DISPLAY=:1 ./sovran_launch_door.sh $GAME_ID"
+    echo ""
+    echo "    Setup checklist:"
+    echo "    1. pkg install x11-repo && pkg install termux-x11-nightly"
+    echo "    2. Install app-universal-debug.apk from GitHub nightly release"
+    echo "       (Settings → Apps → Special app access → Install unknown apps)"
+    echo "    3. Run: termux-x11 :1 &"
+    echo "    4. Run: DISPLAY=:1 ./sovran_launch_door.sh $GAME_ID"
+    echo ""
+    echo "    If you see a black screen: try -legacy-drawing mode:"
+    echo "    DISPLAY=:1 DOSBOX_LEGACY=1 ./sovran_launch_door.sh $GAME_ID"
 fi
 
 echo ""

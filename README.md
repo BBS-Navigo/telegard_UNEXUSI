@@ -1,2 +1,2 @@
 # telegard_UNEXUSI
-telegard bbs
+# inspired by telegard bbs

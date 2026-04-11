@@ -134,7 +134,7 @@ mkdir -p PIXEL8/{pixelate/{maw_pixellum/{intake,processing,workflow_docs},facets
 
 # Clone spectorium
 cd PIXEL8
-git clone [spectorium-url] spectorium
+git clone [spectorium-repo-url] spectorium
 ```
 
 ### Phase 2: Content Migration (Chain of Custody)

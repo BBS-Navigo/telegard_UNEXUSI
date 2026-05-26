@@ -22,7 +22,8 @@ def _load_config(config_path: Path) -> dict:
     if not config_path.exists():
         return defaults
 
-    # Keep parser dependency-free: config remains optional and defaults apply.
+    # Keep parser dependency-free: if YAML syntax is present we use defaults,
+    # and if JSON content is provided (even in .yaml) we merge it.
     text = config_path.read_text(encoding="utf-8")
     if text.strip().startswith("{"):
         try:

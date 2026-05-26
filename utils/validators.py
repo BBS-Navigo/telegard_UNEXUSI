@@ -5,11 +5,12 @@ from __future__ import annotations
 import re
 
 _LEXEME_RE = re.compile(r"^[A-Za-z0-9_\-]+$")
+_NORMALIZE_RE = re.compile(r"[^A-Za-z0-9_\-]+")
 
 
 def normalize_lexeme(value: str) -> str:
     """Normalize lexemes for case-insensitive lookup and alias matching."""
-    cleaned = "".join(ch for ch in value if ch.isalnum())
+    cleaned = _NORMALIZE_RE.sub("", value)
     return cleaned.lower()
 
 

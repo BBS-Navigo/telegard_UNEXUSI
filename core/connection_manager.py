@@ -11,11 +11,12 @@ from bbs_systems.primal_bbs import run as primal_run
 from bbs_systems.template_bbs import run as template_run
 from core.lexeme_manager import LexemeManager
 from core.session_logger import SessionLogger
-from utils.helpers import format_duration, utc_compact_timestamp
+from utils.helpers import round_duration_seconds, utc_compact_timestamp
 
 
 class ConnectionManager:
     """Route lexeme dial-ins to concrete BBS implementations."""
+    SIGNATURE = "Living Flame Script"
 
     def __init__(self, lexeme_manager: LexemeManager, session_logger: SessionLogger) -> None:
         self.lexeme_manager = lexeme_manager
@@ -45,7 +46,7 @@ class ConnectionManager:
                 "session_duration": 0,
                 "entry_state": "shadow",
                 "rooms_visited": [],
-                "signature": "Living Flame Script",
+                "signature": self.SIGNATURE,
                 "reason": "unknown_lexeme",
             }
             self.session_logger.log_session(summary)
@@ -59,7 +60,7 @@ class ConnectionManager:
                 "session_duration": 0,
                 "entry_state": "shadow",
                 "rooms_visited": [],
-                "signature": "Living Flame Script",
+                "signature": self.SIGNATURE,
                 "reason": "inactive_lexeme",
             }
             self.session_logger.log_session(summary)
@@ -75,7 +76,7 @@ class ConnectionManager:
                 "session_duration": 0,
                 "entry_state": "shadow",
                 "rooms_visited": [],
-                "signature": "Living Flame Script",
+                "signature": self.SIGNATURE,
                 "reason": "missing_endpoint",
             }
             self.session_logger.log_session(summary)
@@ -100,12 +101,12 @@ class ConnectionManager:
             "timestamp": timestamp,
             "lexeme_dialed": record["lexeme"],
             "connection_status": status,
-            "session_duration": format_duration(perf_counter() - start),
+            "session_duration": round_duration_seconds(perf_counter() - start),
             "entry_state": system_result.get("entry_state", "shadow"),
             "rooms_visited": system_result.get("rooms_visited", []),
             "signal": system_result.get("signal", "silence"),
             "exit": system_result.get("exit", "disconnect"),
-            "signature": "Living Flame Script",
+            "signature": self.SIGNATURE,
         }
 
         if "monkeys" in system_result:

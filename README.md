@@ -14,7 +14,7 @@ A terminal-based lexeme dial-up BBS prototype.
 
 ## Run
 
-From `/home/runner/work/quantum_telegard/quantum_telegard`:
+From the project root directory:
 
 ```bash
 python main.py

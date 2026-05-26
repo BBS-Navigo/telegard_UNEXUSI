@@ -1,6 +1,6 @@
 # Adding a New BBS Module
 
-1. Create a module in `/home/runner/work/quantum_telegard/quantum_telegard/bbs_systems/`.
+1. Create a module in `bbs_systems/`.
 2. Expose a `run(session, input_func=input, output_func=print) -> dict` function.
 3. Return a dictionary with at least:
    - `entry_state`

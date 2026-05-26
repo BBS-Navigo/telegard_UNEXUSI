@@ -38,6 +38,12 @@ class TestLexemeManager(unittest.TestCase):
         self.assertIsNotNone(record)
         self.assertEqual(record["endpoint"], "primal_bbs")
 
+    def test_resolve_alias_with_underscore(self):
+        manager = LexemeManager(self.registry_path)
+        record = manager.resolve("primal_bbs")
+        self.assertIsNotNone(record)
+        self.assertEqual(record["lexeme"], "primal")
+
     def test_unknown_lexeme(self):
         manager = LexemeManager(self.registry_path)
         self.assertIsNone(manager.resolve("unknown"))

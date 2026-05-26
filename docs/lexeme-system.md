@@ -4,7 +4,7 @@ The lexeme dial-up system routes text lexemes (like `primal`) to BBS modules.
 
 ## Registry
 
-Registry file: `/home/runner/work/quantum_telegard/quantum_telegard/config/lexeme_registry.json`
+Registry file: `config/lexeme_registry.json`
 
 Each lexeme contains:
 - `full_name`

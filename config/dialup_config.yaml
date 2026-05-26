@@ -1,0 +1,9 @@
+terminal:
+  splash: true
+  connection_delay_seconds: 0.2
+  max_history: 20
+system:
+  default_lexeme: primal
+  debug: false
+logging:
+  session_log_path: logs/sessions.log

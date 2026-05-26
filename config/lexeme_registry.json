@@ -1,0 +1,18 @@
+{
+  "primal": {
+    "full_name": "Primal BBS",
+    "endpoint": "primal_bbs",
+    "description": "The Primal BBS system",
+    "dial_number": null,
+    "status": "active",
+    "aliases": ["primal_bbs", "primalBBS"]
+  },
+  "house": {
+    "full_name": "THE House of Confusion BBS",
+    "endpoint": "house_of_confusion_bbs",
+    "description": "Shadow entrance and exit-oriented room routing",
+    "dial_number": null,
+    "status": "active",
+    "aliases": ["house_of_confusion", "thehouse", "confusion"]
+  }
+}

@@ -23,6 +23,11 @@ class TestConnectionManager(unittest.TestCase):
                         "endpoint": "primal_bbs",
                         "status": "active",
                         "aliases": ["primal_bbs"],
+                    },
+                    "sysop": {
+                        "endpoint": "sysop_hub_bbs",
+                        "status": "active",
+                        "aliases": ["ops"],
                     }
                 }
             ),
@@ -46,6 +51,12 @@ class TestConnectionManager(unittest.TestCase):
         result = self.manager.connect("primal", input_func=lambda _: next(responses), output_func=lambda _: None)
         self.assertEqual(result["connection_status"], "success")
         self.assertIn("rooms_visited", result)
+
+    def test_connect_sysop_alias_success(self):
+        responses = iter(["", "3"])
+        result = self.manager.connect("ops", input_func=lambda _: next(responses), output_func=lambda _: None)
+        self.assertEqual(result["connection_status"], "success")
+        self.assertEqual(result["lexeme_dialed"], "sysop")
 
 
 if __name__ == "__main__":

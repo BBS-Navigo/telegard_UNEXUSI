@@ -14,5 +14,13 @@
     "dial_number": null,
     "status": "active",
     "aliases": ["house_of_confusion", "thehouse", "confusion"]
+  },
+  "sysop": {
+    "full_name": "SYSOP Hub BBS",
+    "endpoint": "sysop_hub_bbs",
+    "description": "Simple operator console with notes, status, and clean disconnect",
+    "dial_number": null,
+    "status": "active",
+    "aliases": ["ops", "hub", "sysop_hub"]
   }
 }

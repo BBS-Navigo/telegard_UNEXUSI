@@ -10,6 +10,7 @@ A terminal-based lexeme dial-up BBS prototype.
 - Ships with:
   - `primal` BBS
   - `house` (THE House of Confusion) BBS
+  - `sysop` (SYSOP Hub) BBS
   - a template BBS module for extension
 
 ## Run

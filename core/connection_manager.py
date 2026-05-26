@@ -8,6 +8,7 @@ from typing import Callable, Dict
 
 from bbs_systems.house_of_confusion_bbs import run as house_run
 from bbs_systems.primal_bbs import run as primal_run
+from bbs_systems.sysop_hub_bbs import run as sysop_run
 from bbs_systems.template_bbs import run as template_run
 from core.lexeme_manager import LexemeManager
 from core.session_logger import SessionLogger
@@ -24,6 +25,7 @@ class ConnectionManager:
         self.systems: Dict[str, Callable] = {
             "primal_bbs": primal_run,
             "house_of_confusion_bbs": house_run,
+            "sysop_hub_bbs": sysop_run,
             "template_bbs": template_run,
         }
 

@@ -1,6 +1,8 @@
 # Instincts generated from https://github.com/Eaprime1/quantum_telegard
 # Generated: 2026-05-26T09:06:53.923Z
 # Version: 2.0
+# 21st iteration marker: 🃏
+# Next iteration seeds: validate generated guidance against live Python imports, tests, and workflow files before publishing.
 # NOTE: This file supplements (does not replace) any existing curated instincts.
 # High-confidence manually curated instincts should be preserved alongside these.
 
@@ -78,12 +80,12 @@ source_repo: https://github.com/Eaprime1/quantum_telegard
 
 ## Action
 
-Use relative imports for project files
+Use explicit package imports for repository modules
 
 ## Evidence
 
-- Import analysis shows relative import pattern
-- Example: import { x } from '../lib/x'
+- `main.py` imports `ConnectionManager`, `Dialer`, `LexemeManager`, and `SessionLogger` from package modules
+- `tests/test_connection_manager.py` imports `ConnectionManager`, `LexemeManager`, and `SessionLogger` the same way
 
 ---
 id: quantum_telegard-export-style
@@ -98,12 +100,12 @@ source_repo: https://github.com/Eaprime1/quantum_telegard
 
 ## Action
 
-Prefer named exports
+Import concrete symbols from the module that defines them; no repository-wide `__all__` export pattern is established
 
 ## Evidence
 
-- Export pattern analysis
-- Dominant style: named
+- `core/connection_manager.py` imports concrete `run` callables from `bbs_systems.*`
+- Repository search shows no established `__all__` usage in tracked Python modules
 
 ---
 id: quantum_telegard-test-separate
@@ -118,12 +120,13 @@ source_repo: https://github.com/Eaprime1/quantum_telegard
 
 ## Action
 
-Place tests in the tests/ or __tests__/ directory, mirroring src structure
+Place tests in the dedicated `tests/` directory
 
 ## Evidence
 
-- Separate test directory pattern detected
-- Tests live in dedicated test folders
+- `tests/test_connection_manager.py`
+- `tests/test_dialer.py`
+- `tests/test_lexeme_manager.py`
 
 ---
 id: quantum_telegard-test-naming
@@ -138,12 +141,13 @@ source_repo: https://github.com/Eaprime1/quantum_telegard
 
 ## Action
 
-Name test files using the pattern: *.test.ts
+Name test files using the pattern: `test_*.py`
 
 ## Evidence
 
-- File pattern: *.test.ts
-- Consistent across test files
+- `tests/test_connection_manager.py`
+- `tests/test_dialer.py`
+- `tests/test_lexeme_manager.py`
 
 ---
 id: quantum_telegard-workflow-feature-development-with-tests-and-docs
@@ -227,11 +231,12 @@ source_repo: Eaprime1/quantum_telegard
 
 ## Action
 
-Use camelCase for function names
+Use snake_case for function names
 
 ## Evidence
 
-- Pattern in codeStyle.namingConventions.functions
+- `core/lexeme_manager.py` defines `known_lexemes`, `reload`, and `suggestions`
+- `core/connection_manager.py` defines `connect`
 
 ---
 id: quantum_telegard-instinct-class-naming
@@ -265,11 +270,11 @@ source_repo: Eaprime1/quantum_telegard
 
 ## Action
 
-Use SCREAMING_SNAKE_CASE for constant names
+Follow local module style; uppercase constants appear when needed, such as `ConnectionManager.SIGNATURE`
 
 ## Evidence
 
-- Pattern in codeStyle.namingConventions.constants
+- `core/connection_manager.py` defines `SIGNATURE = "Living Flame Script"`
 
 ---
 id: quantum_telegard-instinct-import-style
@@ -284,11 +289,12 @@ source_repo: Eaprime1/quantum_telegard
 
 ## Action
 
-Use relative imports
+Use explicit package imports such as `from core.connection_manager import ConnectionManager`
 
 ## Evidence
 
-- Pattern in codeStyle.importStyle
+- `main.py` imports from `core.*`
+- `tests/test_dialer.py` imports from `core.*`
 
 ---
 id: quantum_telegard-instinct-export-style
@@ -303,11 +309,12 @@ source_repo: Eaprime1/quantum_telegard
 
 ## Action
 
-Use named exports
+Import concrete symbols directly from defining modules; no repository-wide export list pattern is established
 
 ## Evidence
 
-- Pattern in codeStyle.exportStyle
+- `core/connection_manager.py` imports concrete `run` callables from `bbs_systems.*`
+- Repository search shows no `__all__` pattern in tracked Python modules
 
 ---
 id: quantum_telegard-instinct-test-location
@@ -361,11 +368,13 @@ source_repo: Eaprime1/quantum_telegard
 
 ## Action
 
-Use the pattern *.test.ts for test files
+Use the pattern `test_*.py` for test files
 
 ## Evidence
 
-- Pattern in testing.filePattern (note: low confidence due to Python codebase and .ts pattern)
+- `tests/test_connection_manager.py`
+- `tests/test_dialer.py`
+- `tests/test_lexeme_manager.py`
 
 ---
 id: quantum_telegard-instinct-commit-format
@@ -445,4 +454,3 @@ Remove all __pycache__/*.pyc files from tracked files and add or update .gitigno
 
 - Workflow pycache-cleanup
 - Commits: 'chore: remove pycache artifacts and add gitignore', 'chore: purge tracked python bytecode caches'
-

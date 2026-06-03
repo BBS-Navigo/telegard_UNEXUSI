@@ -2,7 +2,7 @@
 # Generated: 2026-05-26T09:06:53.923Z
 # Version: 2.0
 # 21st iteration marker: 🃏
-# Next iteration seeds: validate generated guidance against live Python imports, tests, and workflow files before publishing.
+# Next iteration seeds: validate generated guidance against live Python imports, tests, workflow files, and lexeme routing behaviors before publishing. 🃏 Task: keep repository-verified validation and routing instincts in this bundle.
 # NOTE: This file supplements (does not replace) any existing curated instincts.
 # High-confidence manually curated instincts should be preserved alongside these.
 
@@ -375,6 +375,46 @@ Use the pattern `test_*.py` for test files
 - `tests/test_connection_manager.py`
 - `tests/test_dialer.py`
 - `tests/test_lexeme_manager.py`
+
+---
+id: quantum_telegard-instinct-validation-command
+trigger: "When validating Python changes in the repository"
+confidence: 0.95
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Validation Command
+
+## Action
+
+Run `python -m unittest discover -s tests` from the repository root for standard validation
+
+## Evidence
+
+- `tests/test_connection_manager.py`, `tests/test_dialer.py`, and `tests/test_lexeme_manager.py` use `unittest`
+- Repository validation succeeds with `python -m unittest discover -s tests`
+
+---
+id: quantum_telegard-instinct-lexeme-alias-routing
+trigger: "When adding or updating lexeme registry entries or connection routing"
+confidence: 0.9
+domain: architecture
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Lexeme Alias Routing
+
+## Action
+
+Keep aliases in `config/lexeme_registry.json` aligned with `ConnectionManager` endpoint routing, and preserve alias coverage for `sysop` -> `sysop_hub_bbs`
+
+## Evidence
+
+- `config/lexeme_registry.json` maps `sysop` aliases `ops`, `hub`, and `sysop_hub` to endpoint `sysop_hub_bbs`
+- `tests/test_connection_manager.py` verifies `ops` resolves and connects as the `sysop` lexeme
 
 ---
 id: quantum_telegard-instinct-commit-format

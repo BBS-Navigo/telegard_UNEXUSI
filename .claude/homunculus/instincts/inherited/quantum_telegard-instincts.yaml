@@ -1,0 +1,496 @@
+# Instincts generated from https://github.com/Eaprime1/quantum_telegard
+# Generated: 2026-05-26T09:06:53.923Z
+# Version: 2.0
+# 21st iteration marker: 🃏
+# Next iteration seeds: validate generated guidance against live Python imports, tests, workflow files, and lexeme routing behaviors before publishing. 🃏 Task: keep repository-verified validation and routing instincts in this bundle.
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: quantum_telegard-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat, chore, fix
+
+## Evidence
+
+- 5 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat: implement lexeme dial-up terminal core system, fix: address review feedback and finalize lexeme dial-up implementation
+
+---
+id: quantum_telegard-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Commit Length
+
+## Action
+
+Write moderate-length commit messages (~51 characters)
+
+## Evidence
+
+- Average commit message length: 51 chars
+- Based on 5 commits
+
+---
+id: quantum_telegard-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Naming Files
+
+## Action
+
+Use snake_case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: snake_case
+
+---
+id: quantum_telegard-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Import Relative
+
+## Action
+
+Use explicit package imports for repository modules
+
+## Evidence
+
+- `main.py` imports `ConnectionManager`, `Dialer`, `LexemeManager`, and `SessionLogger` from package modules
+- `tests/test_connection_manager.py` imports `ConnectionManager`, `LexemeManager`, and `SessionLogger` the same way
+
+---
+id: quantum_telegard-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Export Style
+
+## Action
+
+Import concrete symbols from the module that defines them; no repository-wide `__all__` export pattern is established
+
+## Evidence
+
+- `core/connection_manager.py` imports concrete `run` callables from `bbs_systems.*`
+- Repository search shows no established `__all__` usage in tracked Python modules
+
+---
+id: quantum_telegard-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Test Separate
+
+## Action
+
+Place tests in the dedicated `tests/` directory
+
+## Evidence
+
+- `tests/test_connection_manager.py`
+- `tests/test_dialer.py`
+- `tests/test_lexeme_manager.py`
+
+---
+id: quantum_telegard-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Test Naming
+
+## Action
+
+Name test files using the pattern: `test_*.py`
+
+## Evidence
+
+- `tests/test_connection_manager.py`
+- `tests/test_dialer.py`
+- `tests/test_lexeme_manager.py`
+
+---
+id: quantum_telegard-workflow-feature-development-with-tests-and-docs
+trigger: "when doing feature development with tests and docs"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Workflow Feature Development With Tests And Docs
+
+## Action
+
+Follow the feature-development-with-tests-and-docs workflow:
+1. Create or update implementation files in bbs_systems/ and/or core/
+2. Update configuration files such as config/lexeme_registry.json
+3. Update or add documentation in docs/
+4. Update README.md
+5. Add or update corresponding tests in tests/
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: bbs_systems/*.py, core/*.py, config/lexeme_registry.json
+
+---
+id: quantum_telegard-workflow-pycache-cleanup
+trigger: "when doing pycache cleanup"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Workflow Pycache Cleanup
+
+## Action
+
+Follow the pycache-cleanup workflow:
+1. Remove all __pycache__/*.pyc files from tracked files
+2. Add or update .gitignore to include __pycache__ patterns
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: **/__pycache__/*.pyc, .gitignore
+
+---
+id: quantum_telegard-instinct-file-naming
+trigger: "When creating or renaming a file in the repository"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct File Naming
+
+## Action
+
+Use snake_case for file names
+
+## Evidence
+
+- Pattern in folderStructure.commonFolders
+- No evidence of PascalCase or camelCase file names
+
+---
+id: quantum_telegard-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Function Naming
+
+## Action
+
+Use snake_case for function names
+
+## Evidence
+
+- `core/lexeme_manager.py` defines `known_lexemes`, `reload`, and `suggestions`
+- `core/connection_manager.py` defines `connect`
+
+---
+id: quantum_telegard-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.classes
+
+---
+id: quantum_telegard-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Constant Naming
+
+## Action
+
+Follow local module style; uppercase constants appear when needed, such as `ConnectionManager.SIGNATURE`
+
+## Evidence
+
+- `core/connection_manager.py` defines `SIGNATURE = "Living Flame Script"`
+
+---
+id: quantum_telegard-instinct-import-style
+trigger: "When importing modules within the package"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Import Style
+
+## Action
+
+Use explicit package imports such as `from core.connection_manager import ConnectionManager`
+
+## Evidence
+
+- `main.py` imports from `core.*`
+- `tests/test_dialer.py` imports from `core.*`
+
+---
+id: quantum_telegard-instinct-export-style
+trigger: "When exporting functions or classes from a module"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Export Style
+
+## Action
+
+Import concrete symbols directly from defining modules; no repository-wide export list pattern is established
+
+## Evidence
+
+- `core/connection_manager.py` imports concrete `run` callables from `bbs_systems.*`
+- Repository search shows no `__all__` pattern in tracked Python modules
+
+---
+id: quantum_telegard-instinct-test-location
+trigger: "When adding or updating tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Test Location
+
+## Action
+
+Place test files in the separate tests/ folder
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation
+- Workflow feature-development-with-tests-and-docs includes tests/*.py
+
+---
+id: quantum_telegard-instinct-test-type
+trigger: "When writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Test Type
+
+## Action
+
+Write unit tests
+
+## Evidence
+
+- Pattern in testing.testTypes
+
+---
+id: quantum_telegard-instinct-test-pattern
+trigger: "When naming a test file"
+confidence: 0.3
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Test Pattern
+
+## Action
+
+Use the pattern `test_*.py` for test files
+
+## Evidence
+
+- `tests/test_connection_manager.py`
+- `tests/test_dialer.py`
+- `tests/test_lexeme_manager.py`
+
+---
+id: quantum_telegard-instinct-validation-command
+trigger: "When validating Python changes in the repository"
+confidence: 0.95
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Validation Command
+
+## Action
+
+Run `python -m unittest discover -s tests` from the repository root for standard validation
+
+## Evidence
+
+- `tests/test_connection_manager.py`, `tests/test_dialer.py`, and `tests/test_lexeme_manager.py` use `unittest`
+- Repository validation succeeds with `python -m unittest discover -s tests`
+
+---
+id: quantum_telegard-instinct-lexeme-alias-routing
+trigger: "When adding or updating lexeme registry entries or connection routing"
+confidence: 0.9
+domain: architecture
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Lexeme Alias Routing
+
+## Action
+
+Keep aliases in `config/lexeme_registry.json` aligned with `ConnectionManager` endpoint routing, and preserve alias coverage for `sysop` -> `sysop_hub_bbs`
+
+## Evidence
+
+- `config/lexeme_registry.json` maps `sysop` aliases `ops`, `hub`, and `sysop_hub` to endpoint `sysop_hub_bbs`
+- `tests/test_connection_manager.py` verifies `ops` resolves and connects as the `sysop` lexeme
+
+---
+id: quantum_telegard-instinct-commit-format
+trigger: "When making a git commit"
+confidence: 0.95
+domain: git
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Commit Format
+
+## Action
+
+Use conventional commit prefixes: feat, fix, chore
+
+## Evidence
+
+- Pattern in commits.prefixes
+- Examples: 'feat: implement lexeme dial-up terminal core system', 'fix: address review feedback and finalize lexeme dial-up implementation', 'chore: remove pycache artifacts and add gitignore'
+
+---
+id: quantum_telegard-instinct-commit-length
+trigger: "When writing a commit message"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Commit Length
+
+## Action
+
+Keep the commit message around 50 characters on average
+
+## Evidence
+
+- Pattern in commits.averageLength
+
+---
+id: quantum_telegard-instinct-feature-dev-workflow
+trigger: "When adding a new BBS system or core functionality"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Feature Dev Workflow
+
+## Action
+
+Create or update implementation files in bbs_systems/ and/or core/, update config/lexeme_registry.json, update or add docs/*.md and README.md, and add or update corresponding tests in tests/
+
+## Evidence
+
+- Workflow feature-development-with-tests-and-docs
+- Commit and file patterns in workflow example
+
+---
+id: quantum_telegard-instinct-pycache-cleanup-workflow
+trigger: "When cleaning up tracked __pycache__ files and preventing them from being committed again"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: Eaprime1/quantum_telegard
+---
+
+# Quantum_telegard Instinct Pycache Cleanup Workflow
+
+## Action
+
+Remove all __pycache__/*.pyc files from tracked files and add or update .gitignore to include __pycache__ patterns
+
+## Evidence
+
+- Workflow pycache-cleanup
+- Commits: 'chore: remove pycache artifacts and add gitignore', 'chore: purge tracked python bytecode caches'
